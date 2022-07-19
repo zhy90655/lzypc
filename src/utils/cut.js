@@ -4,7 +4,8 @@ export function recording(_this) {
     _this.idx = ''
     _this._recorder.stop()
     setTimeout(() => {
-      download(URL.createObjectURL(_this.currentWebmData), _this.data.deviceGeneralInformation.deviceName + '_' + formatDateAndTime(new Date()) + '.webm')
+      // download(URL.createObjectURL(_this.currentWebmData), '123.webm')
+      download(URL.createObjectURL(_this.currentWebmData), _this.data.info.deviceName + '_' + formatDateAndTime(new Date()) + '.webm')
     }, 100)
   } else { // 开始录制
     const { captureStream, mimeType } = webrtcpolify
@@ -21,5 +22,5 @@ export function shot(_this) {
   canvas.width = _this.$refs.preview.videoWidth
   canvas.height = _this.$refs.preview.videoHeight
   canvas.getContext('2d').drawImage(_this.$refs.preview, 0, 0)
-  download(canvas.toDataURL('image/jpg'), _this.data.deviceGeneralInformation.deviceName + '_' + formatDateAndTime(new Date()) + '.png')
+  download(canvas.toDataURL('image/jpg'), _this.data.info.deviceName + '_' + formatDateAndTime(new Date()) + '.png')
 }

@@ -22,9 +22,7 @@ export default {
   props: ['data', 'chosed', 'modelValue'],
   components: { Setting, Refresh, Loading },
   data() {
-    return {
-      loading: false
-    }
+    return { loading: false }
   },
   methods: {
     getstatus() {

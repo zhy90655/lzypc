@@ -5,8 +5,9 @@
       <p class="btns fxi">
         <i class="fxi" :class="[disIndex.includes(i)&&'dis',idx===i&&'act']" v-for="(_ ,i) in btns" @click="hdclick(i)" :key="i"><img :src="_.img"></i>
       </p>
-      <video ref="preview" v-if="data.connected" muted x5-playsinline="true" playsinline="true" webkit-playsinline="true" autoplay controls>
-        <source src="/static/video/media.mkv">
+      <video ref="preview" v-if="data.connected" x5-playsinline="true" playsinline="true" webkit-playsinline="true" autoplay controls>
+        <!-- <source src="/static/video/media.mkv"> -->
+        <source src="/static/video/xg.mp4">
       </video>
       <div class="nodata fxi" v-else>
         <el-icon v-if="loading" class="is-loading"><Loading /></el-icon>
@@ -80,6 +81,7 @@ export default {
     }
     video {
       width: 100%;
+      max-height: 789px;
     }
     .nodata {
       width: 100%;

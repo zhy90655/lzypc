@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogVisible" width="56%" :close-on-click-modal="false" @closed="$emit('cls')" custom-class="setdlg">
+  <el-dialog v-model="dialogVisible" width="760px" :close-on-click-modal="false" @closed="$emit('cls')" custom-class="setdlg">
     <div class="ctt">
       <div class="left">
         <h3>设置</h3>
@@ -66,6 +66,9 @@ export default {
       const method = findKeyByValue(dicget, this.key)
       method && this.$mqtt.publish(method)
     }
+  },
+  created() {
+    this.showSubSet('Motion Detection')
   }
 }
 </script>

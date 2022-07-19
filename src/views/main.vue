@@ -1,14 +1,15 @@
 <template>
   <div class="container">
-    <Head />
+    <Head v-model="type" />
     <div class="content">
       <ll-scrollbar :class="['list', spread&&'hide']">
         <Camera v-for="(_, i) in list" :key="i" v-model="cmrloading" :chosed='item.uuidId==_.uuidId' @click='chose(_)'
          :data='_' @change="hdchange($event, i)" @setting="showset=1"/>
       </ll-scrollbar>
-      <Paly :data='item' v-model:spread="spread" :loading='cmrloading' />
+      <History v-if="type" v-model:spread="spread" />
+      <Paly :data='item' v-model:spread="spread" v-else :loading='cmrloading' />
     </div>
-    <Set v-if="showset" />
+    <Set v-if="showset" @cls="showset=0" />
   </div>
 </template>
 <script>
@@ -17,16 +18,18 @@ import { fmtdata } from '../utils/tool'
 import mqtt from '../api/mqtt/requst'
 import Set from '../components/set/index.vue'
 import Camera from '../components/camera.vue'
-import Paly from './paly'
+import Paly from './paly.vue'
 import Head from './head.vue'
+import { defineAsyncComponent } from 'vue'
 export default {
-  components: { Camera, Head, Paly, Set },
+  components: { Camera, Head, Paly, History: defineAsyncComponent(() => import('./history.vue')), Set },
   data() {
     return {
-      spread: false,
+      type: 0, // 预览 回放
+      spread: false, // 展开
       list: [],
-      item: { connected: false },
-      showset: 1,
+      item: { },
+      showset: 0,
       total: 0,
       current: 1,
       size: 9,
@@ -68,6 +71,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   height: 100%;
+  min-width: 970px;
   box-sizing: border-box;
   .content {
     height: calc(100% - 88px);

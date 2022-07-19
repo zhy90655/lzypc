@@ -1,25 +1,22 @@
 <template>
   <div class="head fxi">
     <ul class="tabs fxi">
-      <li v-for="(_, i) in ['预览','回放']" @click="tabchange(i)" :class="[idx==i&&'act']" :key="i">{{_}}</li>
+      <li v-for="(_, i) in ['预览','回放']" @click="$emit('update:modelValue',i)" :class="[modelValue==i&&'act']" :key="i">{{_}}</li>
+    </ul>
+    <ul class="icons fxi">
+      <img src="../assets/img/icons/list.png">
+      <li v-for="_ in 4" :key="_" @click="hdclik(_)"></li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  emits: ['change'],
-  props: {
-    msg: String
-  },
+  emits: ['update:modelValue'],
+  props: ['modelValue'],
   methods: {
-    tabchange(i) {
-      this.idx = i
-    }
-  },
-  data() {
-    return {
-      idx: 0
+    hdclik(i) {
+      console.log(i)
     }
   }
 }
@@ -32,6 +29,23 @@ export default {
   justify-content: center;
   box-sizing: border-box;
   padding-top: 20px;
+  position: relative;
+  .icons {
+    position: absolute;
+    right: 30px;
+    li {
+      width: 29px;
+      height: 29px;
+      margin-left: 4px;
+      z-index: 1;
+      cursor: pointer;
+    }
+    img {
+      position: absolute;
+      right: 2px;
+      top: 1px;
+    }
+  }
   .tabs {
     li {
       cursor: pointer;

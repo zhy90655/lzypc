@@ -1,6 +1,5 @@
 <template>
   <div class="malist">
-    <Head title="Motion Alerts" @back='$emit("close")' />
     <ul class="fst">
       <li v-for="(_,i) in motionAlerts" :key="i" @click="setma(i)" class="fxi">
         {{_}}<img src="../../assets/img/setting/icon_click.png" v-if="val==i">
@@ -10,11 +9,9 @@
 </template>
 
 <script>
-import Head from './head.vue'
 export default {
   emits: ['close', 'change'],
   props: ['motionAlerts', 'value'],
-  components: { Head },
   data() {
     return { val: '' }
   },
