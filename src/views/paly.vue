@@ -27,7 +27,7 @@ import { ElMessage } from 'element-plus'
 const rq = (v) => require('../assets/img/icons/' + v + '.png')
 export default {
   components: { ArrowRightBold, ArrowLeftBold, Loading },
-  emits: ['change', 'update:spread'],
+  emits: ['change', 'update:spread', 'setting'],
   props: ['data', 'spread', 'loading'],
   data() {
     return {
@@ -52,7 +52,7 @@ export default {
         case 3: this.showSet = this.idx !== 3; this.idx = this.idx === 3 ? '' : 3; break // 回放
         case 4: ElMessage('敬请期待！'); break // 开灯
         case 5: this.showSet = true; this.setTabValue = 'alarmInformation'; break // 警告设置
-        case 6: this.showSet = true; this.setTabValue = 'notificationInformation'; break // 设置
+        case 6: this.showSet = true; this.$emit('setting'); break // 设置
       }
     }
   },

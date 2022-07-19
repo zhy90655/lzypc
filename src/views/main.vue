@@ -7,9 +7,9 @@
          :data='_' @change="hdchange($event, i)" @setting="showset=1"/>
       </ll-scrollbar>
       <History v-if="type" v-model:spread="spread" />
-      <Paly :data='item' v-model:spread="spread" v-else :loading='cmrloading' />
+      <Paly :data='item' v-model:spread="spread" v-else :loading='cmrloading' @setting="showset=1"/>
     </div>
-    <Set v-if="showset" @cls="showset=0" />
+    <Set v-if="showset" @cls="showset=0"  />
   </div>
 </template>
 <script>
