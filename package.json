@@ -8,16 +8,17 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "core-js": "^3.8.3",
     "element-plus": "^2.2.8",
+    "jmuxer": "^2.0.4",
     "mqtt": "^4.3.7",
     "node-polyfill-webpack-plugin": "^2.0.0",
-    "axios": "^0.27.2",
-    "vuex": "^4.0.0",
-    "vuex-persistedstate": "^4.1.0",
-    "core-js": "^3.8.3",
     "register-service-worker": "^1.7.2",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "process": "^0.11.10",

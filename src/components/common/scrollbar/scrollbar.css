@@ -43,10 +43,10 @@
 .ll-scrollbar__bar .ll-scrollbar__thumb {
   user-select: none;
   cursor: pointer;
-  background-color: #c1c1c1;
+  background-color: #666;
   border-radius: 4px;
 }
 .ll-scrollbar__bar .ll-scrollbar__thumb:hover {
-  background-color: #a8a8a8;
+  background-color: #777;
 }
 

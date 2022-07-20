@@ -64,3 +64,11 @@ export function formatTime(time) {
 export function getTheme() {
   return localStorage.getItem('__theme_key_')
 }
+export function bFileReader(file) {
+  return new Promise((resolve, reject) => {
+    const fr = new FileReader()
+    fr.onload = resolve // CHANGE to whatever function you want which would eventually call resolve
+    fr.onerror = reject
+    fr.readAsArrayBuffer(file)
+  })
+}

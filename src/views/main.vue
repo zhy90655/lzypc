@@ -44,6 +44,7 @@ export default {
     chose({ uuidId, cardInformation, electricInformation, deviceGeneralInformation: info, connected }, first) {
       if (uuidId === this.item.uuidId) return ''
       this.item = { uuidId, cardInformation, electricInformation, info, connected }
+      this.$store.commit('set_cameraInfo', { ...this.item })
       if (!first) this.$mqtt.uidchange(uuidId)
     },
     getDevice(val) {

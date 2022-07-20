@@ -42,7 +42,7 @@ export default {
     justify-content: space-between;
     left: 0;
     bottom: 0;
-    color: var(--fd-color);
+    color: #aaa;
     line-height: 18px;
   }
   li {
@@ -62,7 +62,7 @@ export default {
       line-height: 18px;
       position: absolute;
       top: -20px;
-      color: #999;
+      color: #bbb;
       font-size: 14px;
     }
     &::after {
