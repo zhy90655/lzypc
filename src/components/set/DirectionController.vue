@@ -90,7 +90,8 @@ export default {
 <style lang="scss" scoped>
 .drctl {
   height: 210px;
-  background-color: var(--ib-color);
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   margin-top: 8px;
   position: relative;

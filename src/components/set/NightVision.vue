@@ -1,5 +1,5 @@
 <template>
-  <div class="vdc" v-if="cameraInfo[labelkey]">
+  <div class="vdc" v-if="data">
     <ul>
       <li v-for="(_,i) in nightVisonOptions" :key="i" class="fxi sct" @click="data.alarmNoticationMode=i;hdchange()">
         <img src="../../assets/img/setting/icon_circle_seleted.png" v-if="data.alarmNoticationMode==i">
@@ -30,7 +30,8 @@ export default {
 <style lang="scss" scoped>
 .sct {
   cursor: pointer;
-  background-color: #fff;
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   margin-top: 12px;
   box-sizing: border-box;
@@ -46,14 +47,14 @@ export default {
   }
 }
 .vdc {
-  padding: 0 30px 20px 10px;
+  padding: 0 16px;
   box-sizing: border-box;
   h6 {
     font-size: 16px;
     font-weight: 400;
   }
   .scd {
-    color: var(--fd-color);
+    color: #aaa;
     font-size: 14px;
     line-height: 18px;
   }

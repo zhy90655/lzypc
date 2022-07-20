@@ -1,5 +1,5 @@
 <template>
-  <div class="vdc" v-if="cameraInfo[labelkey]">
+  <div class="vdc" v-if="data">
     <p class="sct mds fxi">
       Name <i class="fxi">{{data.deviceName}} <img src="../../assets/img/setting/icon_arrow_blue.png"/></i>
     </p>
@@ -8,7 +8,8 @@
     </p>
     <p class="sct mds fxi">
       Status LED
-      <Switch v-model="data.motionDetectionEnable"  @change="hdchange"/>
+      <el-switch v-model="data.motionDetectionEnable" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </p>
     <p class="sct mds fxi">
       Power Manager <i class="fxi"><img src="../../assets/img/setting/icon_arrow_blue.png"/></i>
@@ -51,7 +52,8 @@ export default {
 }
 .sct {
   cursor: pointer;
-  background-color: var(--ib-color);
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   margin-top: 12px;
   box-sizing: border-box;
@@ -60,7 +62,7 @@ export default {
   user-select: none;
 }
 .vdc {
-  padding: 0 30px 20px 10px;
+  padding: 0 16px;
   box-sizing: border-box;
   h6 {
     font-size: 16px;

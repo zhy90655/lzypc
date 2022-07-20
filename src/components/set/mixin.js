@@ -17,7 +17,7 @@ export default {
     }
   },
   created() {
-    this.data = this.cameraInfo[this.labelkey]
+    this.data = this.cameraInfo[this.labelkey] || {}
     console.log(this.data, 887)
   },
   watch: {

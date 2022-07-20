@@ -1,18 +1,21 @@
 <template>
-  <div class="adc" v-if="cameraInfo[labelkey]">
+  <div class="adc" v-if="data">
     <p class="sct mds fxi">
       Microphone
-      <Switch v-model="data.audioMicrophoneEnable"  @change="hdchange"/>
+      <el-switch v-model="data.audioMicrophoneEnable" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </p>
     <div class="sct mds fxi arbox">
       <p>Audio Recording</p>
       <i>Enable audio recording when recording videos.</i>
-      <Switch v-model="data.recordAudioEnable"  @change="hdchange"/>
+      <el-switch v-model="data.recordAudioEnable" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </div>
     <div class="ds sct">
       <p class="mds fxi">
         Speaker
-      <Switch v-model="data.audioSpeakerEnable"  @change="hdchange"/>
+        <el-switch v-model="data.audioSpeakerEnable" size="large" inline-prompt active-text="开" inactive-text="关"
+        :active-value="true" :inactive-value="false" @change="hdchange"/>
       </p>
       <h6>Speaker Volume</h6>
       <Check :disabled='!data.audioSpeakerEnable' @change="hdchange" hidetoptip
@@ -23,9 +26,11 @@
 </template>
 
 <script>
+import Check from '../common/check.vue'
 import mixin from './mixin'
 export default {
-  mixins: [mixin]
+  mixins: [mixin],
+  components: { Check }
 }
 </script>
 <style lang="scss" scoped>
@@ -33,7 +38,7 @@ div.ds {
   height: 183px;
   padding-top: 0;
   >p {
-    border-bottom: 1px solid var(--act-color);
+    border-bottom: 1px solid #F1F1F1;
   }
   h6 {
     margin: 20px 0;
@@ -51,7 +56,7 @@ div.ds {
       position: absolute;
       top: 58px;
       font-size: 14px;
-      color: #666;
+      color: #aaa;
     }
   }
   img {
@@ -62,7 +67,8 @@ div.ds {
 }
 .sct {
   cursor: pointer;
-  background-color: var(--ib-color);
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   margin-top: 12px;
   box-sizing: border-box;
@@ -74,14 +80,14 @@ div.ds {
   }
 }
 .adc {
-  padding: 0 30px 20px 10px;
+  padding: 0 16px;
   box-sizing: border-box;
   h6 {
     font-size: 16px;
     font-weight: 400;
   }
   .scd {
-    color: var(--fd-color);
+    color: #aaa;
     font-size: 14px;
   }
 }

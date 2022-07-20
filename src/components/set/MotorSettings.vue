@@ -1,8 +1,9 @@
 <template>
-  <div class="vdc" v-if="cameraInfo[labelkey]">
+  <div class="vdc" v-if="data">
     <p class="sct mds fxi">
       Motor Status
-      <Switch v-model="data.motorStatus"  @change="hdchange"/>
+      <el-switch v-model="data.motorStatus" disabled size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="1" :inactive-value="0" @change="hdchange"/>
     </p>
     <h6 class="dtt">Stream Mode</h6>
     <DirectionController @change="hddrchange" />
@@ -36,7 +37,8 @@ export default {
   }
 }
 .sct {
-  background-color: var(--ib-color);
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   margin-top: 12px;
   box-sizing: border-box;
@@ -48,7 +50,7 @@ export default {
   }
 }
 .vdc {
-  padding: 0 30px 20px 10px;
+  padding: 0 16px;
   box-sizing: border-box;
   h6 {
     font-size: 16px;

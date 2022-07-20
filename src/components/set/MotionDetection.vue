@@ -1,8 +1,9 @@
 <template>
-  <div class="mdc" v-if="cameraInfo[labelkey]">
+  <div class="mdc" v-if="data">
     <p class="sct mds fxi mtf">
       {{title}}
-      <Switch v-model="data.motionDetectionEnable"  @change="hdchange"/>
+      <el-switch v-model="data.motionDetectionEnable" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </p>
     <div class="az sct">
       <h6>Activity Zone</h6>
@@ -30,9 +31,11 @@
 </template>
 
 <script>
+import Check from '../common/check.vue'
 import mixin from './mixin'
 export default {
-  mixins: [mixin]
+  mixins: [mixin],
+  components: { Check }
 }
 </script>
 <style lang="scss" scoped>
@@ -40,7 +43,8 @@ export default {
   margin: 20px 0 9px 16px;
 }
 .tst {
-  background-color: var(--ib-color);
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   overflow: hidden;
   margin-top: 8px;
@@ -51,14 +55,14 @@ export default {
     height: 59px;
     margin: 0 16px;
     &+li {
-      border-top: 1px solid var(--act-color);
+      border-top: 1px solid #F1F1F1;
     }
     &.tips {
       padding-top: 21px;
       height: 68px;
       box-sizing: border-box;
       font-size: 13px;
-      color: #999;
+      color: #aaa;
       cursor: auto;
     }
     img {
@@ -91,7 +95,8 @@ export default {
 }
 .sct {
   cursor: pointer;
-  background-color: var(--ib-color);
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   margin-top: 12px;
   box-sizing: border-box;
@@ -106,14 +111,14 @@ export default {
   }
 }
 .mdc {
-  padding: 0 30px 20px 10px;
+  padding: 0 16px;
   box-sizing: border-box;
   h6 {
     font-size: 16px;
     font-weight: 400;
   }
   .scd {
-    color: var(--fd-color);
+    color: #aaa;
     font-size: 14px;
   }
 }

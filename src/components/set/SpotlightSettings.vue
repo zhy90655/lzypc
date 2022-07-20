@@ -1,16 +1,19 @@
 <template>
-  <div class="mdc" v-if="cameraInfo[labelkey]">
+  <div class="mdc" v-if="data">
     <p class="sct mds fxi">
       Light
-      <Switch v-model="data.spotLight"  @change="hdchange"/>
+      <el-switch v-model="data.spotLight" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </p>
     <p class="sct mds fxi">
       Blue Light
-      <Switch v-model="data.blueIndicatorLight"  @change="hdchange"/>
+      <el-switch v-model="data.blueIndicatorLight" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </p>
     <p class="sct mds fxi">
       Green Light
-      <Switch v-model="data.greenIndicatorLight"  @change="hdchange"/>
+      <el-switch v-model="data.greenIndicatorLight" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </p>
     <div class="ds sct rdc">
       <h6>Brightness</h6>
@@ -56,7 +59,7 @@ export default {
   }
   .btm {
     justify-content: space-between;
-    color: var(--fd-color);
+    color: #aaa;
     font-size: 14px;
   }
 }
@@ -71,7 +74,8 @@ export default {
 }
 .sct {
   cursor: pointer;
-  background-color: var(--ib-color);
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   margin-top: 12px;
   box-sizing: border-box;
@@ -83,7 +87,7 @@ export default {
   }
 }
 .mdc {
-  padding: 0 30px 20px 10px;
+  padding: 0 16px;
   box-sizing: border-box;
   h6 {
     font-size: 16px;

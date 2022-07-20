@@ -4,7 +4,7 @@
       <p class="btns fxi">
         <i class="fxi" :class="[disIndex.includes(i)&&'dis',idx===i&&'act']" v-for="(_ ,i) in btns" @click="hdclick(i)" :key="i"><img :src="_.img"></i>
       </p>
-      <video ref="preview" v-if="!data.connected" id="player" x5-playsinline="true" playsinline="true" webkit-playsinline="true" autoplay controls>
+      <video ref="preview" v-if="data.connected" id="player" x5-playsinline="true" playsinline="true" webkit-playsinline="true" autoplay controls>
         <!-- <source src="/static/video/media.mkv"> -->
         <source src="/static/video/xg.mp4">
       </video>
@@ -12,9 +12,9 @@
         <el-icon v-if="loading" class="is-loading"><Loading /></el-icon>
         <img v-else src="../assets/img/play/cmr.png">
       </div>
-      <div :class="['cover',showSet&&'showset']" @click="showSet=0">
+      <div :class="['cover',showset&&'showset']" @click="$emit('update:showset',0)">
         <transition name="page-move">
-          <Newset v-if="showSet" @close='showSet=0' />
+          <Set v-if="showset" @close="$emit('update:showset',0)" />
         </transition>
       </div>
     </div>
@@ -30,19 +30,18 @@ import { ArrowRightBold, ArrowLeftBold, Loading } from '@element-plus/icons-vue'
 import { recording, shot } from '../utils/cut'
 import { bFileReader } from '../utils/tool'
 import { ElMessage } from 'element-plus'
-import Newset from '../components/newset'
+import Set from '../components/set'
 import JMuxer from 'jmuxer'
 const rq = (v) => require('../assets/img/icons/' + v + '.png')
 export default {
-  components: { ArrowRightBold, ArrowLeftBold, Loading, Newset },
-  emits: ['change', 'update:spread', 'setting'],
-  props: ['data', 'spread', 'loading'],
+  components: { ArrowRightBold, ArrowLeftBold, Loading, Set },
+  emits: ['change', 'update:spread', 'update:showset', 'setting'],
+  props: ['data', 'spread', 'loading', 'showset'],
   data() {
     return {
       btns: [{ v: 'video', l: '录制' }, { v: 'capture', l: '截图' }, { v: 'dj', l: '对讲' }, { v: 'record', l: '回放' },
         { v: 'light', l: '灯光' }, { v: 'alarm', l: '警告' }, { v: 'setting', l: '设置' }].map(_ => ({ img: rq(_.v), ..._ })),
-      idx: '',
-      showSet: 1
+      idx: ''
     }
   },
   computed: {
@@ -57,6 +56,7 @@ export default {
         node: 'player',
         flushingTime: 1000,
         clearBuffer: false,
+        fps: 15,
         debug: true
       })
       const file = [...files]
@@ -79,8 +79,8 @@ export default {
         case 2: ElMessage('敬请期待！'); break // 对讲
         case 3: this.showSet = this.idx !== 3; this.idx = this.idx === 3 ? '' : 3; break // 回放
         case 4: ElMessage('敬请期待！'); break // 开灯
-        case 5: this.showSet = true; this.setTabValue = 'alarmInformation'; break // 警告设置
-        case 6: this.showSet = true; break // 设置
+        case 5: this.$emit('update:showset', 1); this.setTabValue = 'alarmInformation'; break // 警告设置
+        case 6: this.$emit('update:showset', 1); break // 设置
       }
     }
   },
@@ -106,6 +106,7 @@ export default {
       height: 100%;
       pointer-events: none;
       overflow: hidden;
+      z-index: 1;
     }
     .showset {
       pointer-events: auto;
@@ -157,7 +158,7 @@ export default {
 .btns {
   justify-content: center;
   left: 0px;
-  bottom: 0;
+  bottom: 70px;
   width: 100%;
   z-index: 1;
   position: absolute;

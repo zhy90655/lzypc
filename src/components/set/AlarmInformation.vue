@@ -1,8 +1,9 @@
 <template>
-  <div class="mdc" v-if="cameraInfo[labelkey]">
+  <div class="mdc" v-if="data">
     <p class="sct mds fxi">
       {{title}}
-      <Switch v-model="data.motionDetectionEnable"  @change="hdchange"/>
+      <el-switch v-model="data.motionDetectionEnable" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </p>
     <div class="ds sct">
       <h6>Detection Sensitivity</h6>
@@ -11,7 +12,8 @@
     </div>
     <p class="sct mds fxi">
       Detection Record
-      <Switch v-model="data.motionDetectionRecord"  @change="hdchange"/>
+      <el-switch v-model="data.motionDetectionRecord" size="large" inline-prompt active-text="开" inactive-text="关"
+      :active-value="true" :inactive-value="false" @change="hdchange"/>
     </p>
     <div class="ds sct rdc">
       <h6>Recode Delay</h6>
@@ -24,9 +26,11 @@
 </template>
 
 <script>
+import Check from '../common/check.vue'
 import mixin from './mixin'
 export default {
   mixins: [mixin],
+  components: { Check },
   methods: {
     hdbarclick(v, key1) { // change事件兼容处理
       if (v.target.classList.contains('el-slider__runway')) {
@@ -44,7 +48,7 @@ export default {
   }
   .btm {
     justify-content: space-between;
-    color: var(--fd-color);
+    color: #aaa;
     font-size: 14px;
   }
 }
@@ -59,7 +63,8 @@ export default {
 }
 .sct {
   cursor: pointer;
-  background-color: var(--ib-color);
+  border: 1px solid #fff;
+  box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   border-radius: 16px;
   margin-top: 12px;
   box-sizing: border-box;
@@ -71,7 +76,7 @@ export default {
   }
 }
 .mdc {
-  padding: 0 30px 20px 10px;
+  padding: 0 16px;
   box-sizing: border-box;
   h6 {
     font-size: 16px;
