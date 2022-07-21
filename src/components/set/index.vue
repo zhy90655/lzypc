@@ -32,7 +32,7 @@
           </div>
         </div>
         <ul class="fst">
-          <li v-for="(_,i) in ['Video Settings','Audio Settings','Motor Settings','Alarm Information','Notification','General']"  @click="showSubSet(_)" :key="i" class="fxi">
+          <li v-for="(_,i) in ['Video Settings','Audio Settings','Alarm Information','Notification','General']"  @click="showSubSet(_)" :key="i" class="fxi">
             {{_}}<img src="../../assets/img/setting/icon_arrow_blue.png">
           </li>
         </ul>
@@ -50,8 +50,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { dicget, dicset, settoinfo } from '../../api/mqtt/requst'
-import { findKeyByValue } from '../../utils/tool'
+import { setData, settoinfo, getData } from '../../api/mqtt/requst'
 import { defineAsyncComponent } from 'vue'
 import Header from './header.vue'
 import { ElMessage } from 'element-plus'
@@ -76,18 +75,12 @@ export default {
   },
   methods: {
     hddatachange() {
-      const key = this.key
-      const method = dicset[key]
-      if (method) this.$mqtt.publish(method, { [key]: this.cameraInfo[key] })
-      else console.log('方法不存在:' + key)
+      setData(this.key)
     },
     showSubSet(i, idx) {
       if (idx) return ElMessage('敬请期待！')
       this.label = i
-      console.log(this.cameraInfo, this.key, findKeyByValue(dicget, this.key), i)
-      if (this.cameraInfo[this.key]) return ''
-      const method = findKeyByValue(dicget, this.key)
-      method && this.$mqtt.publish(method)
+      getData(this.key)
     },
     hdchange() {
       console.log(33333)
@@ -119,6 +112,7 @@ export default {
   box-shadow: 0 1px 5px 1px rgb(255 255 255 / 55%);
   justify-content: center;
   cursor: pointer;
+  user-select: none;
   margin-top: 20px;
   &+.sbtn {
     color: #E95A60;

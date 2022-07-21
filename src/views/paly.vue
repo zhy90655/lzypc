@@ -4,8 +4,7 @@
       <p class="btns fxi">
         <i class="fxi" :class="[disIndex.includes(i)&&'dis',idx===i&&'act']" v-for="(_ ,i) in btns" @click="hdclick(i)" :key="i"><img :src="_.img"></i>
       </p>
-      <video ref="preview" v-if="data.connected" id="player" x5-playsinline="true" playsinline="true" webkit-playsinline="true" autoplay controls>
-        <!-- <source src="/static/video/media.mkv"> -->
+      <video ref="preview" v-if="!data.connected" id="player" x5-playsinline="true" playsinline="true" webkit-playsinline="true" autoplay controls>
         <source src="/static/video/xg.mp4">
       </video>
       <div class="nodata fxi" v-else>
@@ -22,6 +21,7 @@
       <el-icon @click="$emit('update:spread',!spread)"><ArrowRightBold v-if="spread" /><ArrowLeftBold v-else /></el-icon>
       <input type="file" multiple @change="hdcg">
     </div>
+    <MotorDirect v-if="idx==3" @cls="idx=''" @change="setData('motionDetectionInformation',{motroControlDirection:$event})" />
   </div>
 </template>
 
@@ -30,11 +30,13 @@ import { ArrowRightBold, ArrowLeftBold, Loading } from '@element-plus/icons-vue'
 import { recording, shot } from '../utils/cut'
 import { bFileReader } from '../utils/tool'
 import { ElMessage } from 'element-plus'
+import { setData, getData } from '../api/mqtt/requst'
 import Set from '../components/set'
+import MotorDirect from '../components/set/MotorDirect.vue'
 import JMuxer from 'jmuxer'
 const rq = (v) => require('../assets/img/icons/' + v + '.png')
 export default {
-  components: { ArrowRightBold, ArrowLeftBold, Loading, Set },
+  components: { ArrowRightBold, ArrowLeftBold, Loading, Set, MotorDirect },
   emits: ['change', 'update:spread', 'update:showset', 'setting'],
   props: ['data', 'spread', 'loading', 'showset'],
   data() {
@@ -50,6 +52,7 @@ export default {
     }
   },
   methods: {
+    setData,
     hdcg({ target: { files } }) {
       if (!files[1]) return ElMessage.error('请选择文件')
       const jmuxer = new JMuxer({
@@ -77,7 +80,7 @@ export default {
         case 0: recording(this); break // 视频录制
         case 1: shot(this); break // 截图
         case 2: ElMessage('敬请期待！'); break // 对讲
-        case 3: this.showSet = this.idx !== 3; this.idx = this.idx === 3 ? '' : 3; break // 回放
+        case 3: this.idx = 3; getData('motorControlInformation'); break // 回放
         case 4: ElMessage('敬请期待！'); break // 开灯
         case 5: this.$emit('update:showset', 1); this.setTabValue = 'alarmInformation'; break // 警告设置
         case 6: this.$emit('update:showset', 1); break // 设置

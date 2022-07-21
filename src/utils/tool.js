@@ -11,13 +11,6 @@ export function fmtdata(data) { // 将json格式数据转成json对象
     if (typeof data[key] === 'string' && data[key].startsWith('{')) data[key] = JSON.parse(data[key])
   }
 }
-export function findKeyByValue(objcet, value) { // 根据对象的value找key
-  let result = ''
-  for (const key in objcet) {
-    if (objcet[key] === value) result = key
-  }
-  return result
-}
 
 export const webrtcpolify = (function(e) { // 浏览器兼容性处理
   return { captureStream: e ? 'mozCaptureStream' : 'captureStream', mimeType: e ? 'video/webm' : 'video/webm;codecs=h264' }

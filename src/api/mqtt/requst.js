@@ -96,3 +96,23 @@ export default ({ uuidId }) => {
   }
   $mqtt.client = client
 }
+
+function findKeyByValue(objcet, value) { // 根据对象的value找key
+  let result = ''
+  for (const key in objcet) {
+    if (objcet[key] === value) result = key
+  }
+  return result
+}
+export function getData(key) { // 发送get消息
+  console.log(Store.state.cameraInfo, key, findKeyByValue(dicget, key))
+  if (Store.state.cameraInfo[key]) return ''
+  const method = findKeyByValue(dicget, key)
+  method && $mqtt.publish(method)
+}
+export function setData(key, params) { // 发送set消息
+  console.log(key)
+  const method = dicset[key]
+  if (method) $mqtt.publish(method, { [key]: { ...Store.state.cameraInfo[key], ...params } })
+  else console.log('方法不存在:' + key)
+}
