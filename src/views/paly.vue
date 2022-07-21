@@ -39,7 +39,7 @@ export default {
   props: ['data', 'spread', 'loading', 'showset'],
   data() {
     return {
-      btns: [{ v: 'video', l: '录制' }, { v: 'capture', l: '截图' }, { v: 'dj', l: '对讲' }, { v: 'record', l: '回放' },
+      btns: [{ v: 'video', l: '录制' }, { v: 'capture', l: '截图' }, { v: 'dj', l: '对讲' }, { v: 'direction', l: '回放' },
         { v: 'light', l: '灯光' }, { v: 'alarm', l: '警告' }, { v: 'setting', l: '设置' }].map(_ => ({ img: rq(_.v), ..._ })),
       idx: ''
     }
@@ -174,6 +174,9 @@ export default {
     height: 44px;
     border-radius: 50%;
     overflow: hidden;
+    &:nth-child(4) img {
+      width: 28px;
+    }
     &.act {
       background-color: rgba($color: #bbb, $alpha: 0.5);
     }
