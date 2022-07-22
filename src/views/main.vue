@@ -26,13 +26,12 @@ export default {
       type: 0, // 预览 回放
       spread: false, // 展开
       list: [],
-      item: { },
+      item: {},
       showset: 0,
       total: 0,
       current: 1,
       size: 9,
-      cmrloading: false,
-      loading: false
+      cmrloading: false
     }
   },
   created() {

@@ -54,9 +54,6 @@ export function formatTime(time) {
   const [hour, minute, second] = time.slice(11).split(':')
   return +hour * 3600 + (+minute * 60) + (+second)
 }
-export function getTheme() {
-  return localStorage.getItem('__theme_key_')
-}
 export function bFileReader(file) {
   return new Promise((resolve, reject) => {
     const fr = new FileReader()

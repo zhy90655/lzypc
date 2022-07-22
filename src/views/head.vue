@@ -5,17 +5,35 @@
     </ul>
     <ul class="icons fxi">
       <img src="../assets/img/icons/list.png">
-      <li v-for="_ in 4" :key="_" @click="hdclik(_)"></li>
+       <el-tooltip placement="bottom" :offset='23' popper-class='t_user'>
+        <template #content>
+          <p class="account">账号：{{userDetail.sysUser.username}}</p>
+          <el-button type='primary' link>退出登录</el-button>
+        </template>
+        <li></li>
+      </el-tooltip>
+      <li v-for="_ in 3" :key="_" @click="hdclik(_)"></li>
     </ul>
+    <AddDevice v-if="idx==1" @cls="idx=''" />
+    <Sysset v-if="idx==3" @cls="idx=''" />
   </div>
 </template>
 
 <script>
+import AddDevice from '../components/system/addDevice.vue'
+import Sysset from '../components/system/sysset.vue'
+import { mapState } from 'vuex'
 export default {
+  components: { AddDevice, Sysset },
+  computed: mapState(['userDetail']),
   emits: ['update:modelValue'],
   props: ['modelValue'],
+  data() {
+    return { idx: '' }
+  },
   methods: {
     hdclik(i) {
+      this.idx = i
       console.log(i)
     }
   }
@@ -70,11 +88,21 @@ export default {
         width: 0%;
         height: 5px;
         border-radius: 2.5px;
-        bottom: 0px;
         transition: width 0.2s linear;
         background-color: var(--bt-color);
       }
     }
+  }
+}
+</style>
+<style lang="scss">
+.t_user {
+  .account {
+    line-height: 24px;
+    padding-left: 2px;
+  }
+  .el-button {
+    padding: 7px 2px 5px 0;
   }
 }
 </style>
