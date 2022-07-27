@@ -1,5 +1,5 @@
-
 /* eslint-disable eqeqeq */
+
 export default class PCMPlayer {
   constructor(channels, sampleRate) {
     this._samples = new Float32Array()
@@ -59,6 +59,22 @@ export default class PCMPlayer {
     if (this._startTime < this._audioCtx.currentTime) {
       this._startTime = this._audioCtx.currentTime
     }
+    console.log(audioBuffer, length)
+
+    // var anchor = document.createElement('a')
+    // document.body.appendChild(anchor)
+    // anchor.style = 'display: none'
+    // var wav = audioBufferToWav(audioBuffer)
+    // var blob = new window.Blob([ new DataView(wav) ], { type: 'audio/wav' })
+    // var url = window.URL.createObjectURL(blob)
+    // const vid = document.querySelector('audio')
+    // vid.src = url
+    // vid.play()
+    // anchor.href = url
+    // anchor.download = 'audio.wav'
+    // anchor.click()
+    // window.URL.revokeObjectURL(url)
+
     bufferSource.buffer = audioBuffer
     bufferSource.connect(this._gainNode)
     bufferSource.start(this._startTime)

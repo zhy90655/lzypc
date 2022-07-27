@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { createFFmpeg } from '@ffmpeg/ffmpeg'
 import { ArrowRightBold, ArrowLeftBold, Loading } from '@element-plus/icons-vue'
 import { recording, shot } from '../utils/cut'
 import { bFileReader } from '../utils/tool'
@@ -36,6 +37,7 @@ import Set from '../components/set'
 import MotorDirect from '../components/set/MotorDirect.vue'
 import JMuxer from 'jmuxer'
 const rq = (v) => require('../assets/img/icons/' + v + '.png')
+const ffmpeg = createFFmpeg({ log: true })
 export default {
   components: { ArrowRightBold, ArrowLeftBold, Loading, Set, MotorDirect },
   emits: ['change', 'update:spread', 'update:showset', 'setting'],
@@ -67,6 +69,7 @@ export default {
         STACK_MAX: memory.buffer.byteLength
       }
     }
+    console.log(ffmpeg)
     this.wasm = fetch('/static/wasm/g711.wasm').then((response) => response.arrayBuffer())
       .then((bytes) => WebAssembly.instantiate(bytes, this.importObj))
   },
