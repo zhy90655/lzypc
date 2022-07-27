@@ -57,7 +57,7 @@ export function formatTime(time) {
 export function bFileReader(file) {
   return new Promise((resolve, reject) => {
     const fr = new FileReader()
-    fr.onload = resolve // CHANGE to whatever function you want which would eventually call resolve
+    fr.onload = (e) => resolve(new Uint8Array(e.target.result)) // CHANGE to whatever function you want which would eventually call resolve
     fr.onerror = reject
     fr.readAsArrayBuffer(file)
   })

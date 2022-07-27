@@ -7,7 +7,7 @@
          :data='_' @change="hdchange($event, i)" @setting="showset=1"/>
       </ll-scrollbar>
       <History v-if="type" v-model:spread="spread" />
-      <Paly :data='item' v-model:spread="spread" v-model:showset="showset" v-else :loading='cmrloading'/>
+      <Play :data='item' v-model:spread="spread" v-model:showset="showset" v-else :loading='cmrloading'/>
     </div>
   </div>
 </template>
@@ -16,11 +16,11 @@ import { getDeviceList } from '../api/http/interface'
 import { fmtdata } from '../utils/tool'
 import mqtt from '../api/mqtt/requst'
 import Camera from '../components/camera.vue'
-import Paly from './paly.vue'
+import Play from './play.vue'
 import Head from './head.vue'
 import { defineAsyncComponent } from 'vue'
 export default {
-  components: { Camera, Head, Paly, History: defineAsyncComponent(() => import('./history.vue')) },
+  components: { Camera, Head, Play, History: defineAsyncComponent(() => import('./history.vue')) },
   data() {
     return {
       type: 0, // 预览 回放

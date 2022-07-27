@@ -13,7 +13,7 @@ export const importObj = {
     STACK_MAX: memory.buffer.byteLength
   }
 }
-export class G711 {
+class G711 {
   constructor(wasm, importObj) {
     if (importObj.memoryBase < 102400) {
       throw new Error('too small')
@@ -37,7 +37,7 @@ export class G711 {
   }
 }
 
-export function shortToFloatData(input) {
+function shortToFloatData(input) {
   const inputSamples = input.length
   const output = new Float32Array(inputSamples)
   for (let i = 0; i != inputSamples; ++i) {
@@ -46,11 +46,10 @@ export function shortToFloatData(input) {
   return output
 }
 const fc = fetch('/static/wasm/g711/audio.wasm').then((e) => e.arrayBuffer()).then((bt) => WebAssembly.instantiate(bt, importObj))
-export const ParseG711 = (file) => {
+export const ParseG711 = (audioData) => {
   return fc.then(wasm => {
     const pcmPlayer = new PCMPlayer(1, 8000)
     const decoder = new G711(wasm, importObj)
-    const audioData = new Uint8Array(file)
     const step = 160
     for (let i = 0; i < audioData.byteLength; i += step) {
       const pcm16BitData = decoder.decodeA.bind(decoder)(audioData.slice(i, i + step))
@@ -61,19 +60,14 @@ export const ParseG711 = (file) => {
   })
 }
 
-export class PCMPlayer {
+class PCMPlayer {
   constructor(channels, sampleRate) {
     this._samples = new Float32Array()
-    this._flushingTime = 200
     this._channels = channels
     this._sampleRate = sampleRate
     this._flush = this._flush.bind(this)
     this._audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-    this._gainNode = this._audioCtx.createGain()
-    this._gainNode.gain.value = 1
-    this._gainNode.connect(this._audioCtx.destination)
     this._startTime = this._audioCtx.currentTime
-    // this._interval = setInterval(this._flush, this._flushingTime)
   }
 
   feed(data) {
