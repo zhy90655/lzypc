@@ -32,7 +32,6 @@ import { recording, shot } from '../utils/cut'
 import { bFileReader } from '../utils/tool'
 import { ElMessage } from 'element-plus'
 import { setData, getData } from '../api/mqtt/requst'
-import { g711 } from '../utils/g711/g711'
 import Set from '../components/set'
 import MotorDirect from '../components/set/MotorDirect.vue'
 import JMuxer from 'jmuxer'
@@ -90,7 +89,6 @@ export default {
       if (acc.name.includes('h264')) [h264, acc] = file
       Promise.all([bFileReader(h264), bFileReader(acc), this.wasm]).then(res => {
         jmuxer.feed({ video: new Uint8Array(res[0].target.result) })
-        g711(new Uint8Array(res[1].target.result), res[2], this.importObj)
       })
     },
     hdclick(i) {
