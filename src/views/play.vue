@@ -34,9 +34,9 @@ import { setData, getData } from '../api/mqtt/requst'
 import Set from '../components/set'
 
 import MotorDirect from '../components/set/MotorDirect.vue'
-import JMuxer from '../assets/jmuxer/src/jmuxer'
+import JMuxer from '../utils/jmuxer/jmuxer'
 import { bFileReader } from '../utils/tool'
-import { ParseG711 } from '../utils/g711'
+import { ParseG711 } from '../utils/audio/g711'
 const ffmpeg = createFFmpeg({ log: false, corePath: '/static/wasm/ffmpeg/ffmpeg-core.js' })
 const rq = (v) => require('../assets/img/icons/' + v + '.png')
 export default {

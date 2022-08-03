@@ -1,5 +1,3 @@
-/* eslint-disable eqeqeq */
-/* eslint-disable no-throw-literal */
 import audioBufferToWav from './towav'
 const memory = new WebAssembly.Memory({ initial: 256, maximum: 256 })
 export const importObj = {
@@ -40,7 +38,7 @@ class G711 {
 function shortToFloatData(input) {
   const inputSamples = input.length
   const output = new Float32Array(inputSamples)
-  for (let i = 0; i != inputSamples; ++i) {
+  for (let i = 0; i !== inputSamples; ++i) {
     output[i] = input[i] / 32768
   }
   return output
@@ -83,11 +81,11 @@ class PCMPlayer {
     }
     const length = this._samples.length / this._channels
     const audioBuffer = this._audioCtx.createBuffer(this._channels, length, this._sampleRate)
-    for (let channel = 0; channel != this._channels; ++channel) {
+    for (let channel = 0; channel !== this._channels; ++channel) {
       const audioData = audioBuffer.getChannelData(channel)
       let offset = channel
       let decrement = 50
-      for (let i = 0; i != length; ++i) {
+      for (let i = 0; i !== length; ++i) {
         audioData[i] = this._samples[offset]
         if (i < 50) {
           audioData[i] = (audioData[i] * i) / 50

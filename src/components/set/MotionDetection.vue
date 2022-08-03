@@ -2,8 +2,7 @@
   <div class="mdc" v-if="data">
     <p class="sct mds fxi mtf">
       {{title}}
-      <el-switch v-model="data.motionDetectionEnable" size="large" inline-prompt active-text="开" inactive-text="关"
-      :active-value="true" :inactive-value="false" @change="hdchange"/>
+      <Switch v-model="data.motionDetectionEnable"  @change="hdchange"/>
     </p>
     <div class="az sct">
       <h6>Activity Zone</h6>
