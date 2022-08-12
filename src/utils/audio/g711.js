@@ -76,9 +76,7 @@ class PCMPlayer {
   };
 
   _flush() {
-    if (!this._channels || !this._sampleRate || !this._samples.length) {
-      return
-    }
+    if (!this._channels || !this._sampleRate || !this._samples.length) return
     const length = this._samples.length / this._channels
     const audioBuffer = this._audioCtx.createBuffer(this._channels, length, this._sampleRate)
     for (let channel = 0; channel !== this._channels; ++channel) {

@@ -13,7 +13,7 @@ export function fmtdata(data) { // 将json格式数据转成json对象
 }
 
 export const webrtcpolify = (function(e) { // 浏览器兼容性处理
-  return { captureStream: e ? 'mozCaptureStream' : 'captureStream', mimeType: e ? 'video/webm' : 'video/webm;codecs=h264' }
+  return { captureStream: e ? 'mozCaptureStream' : 'captureStream', mimeType: e ? 'video/webm' : 'video/webm;codecs=h264', para: e ? ['1.mp4'] : ['-vcodec', 'copy', '1.mp4'] }
 })(navigator.userAgent.includes('Firefox'))
 
 export function hdt(t) { // 1 -> 01
